@@ -1,3 +1,4 @@
+// Modules and Globals
 // Need this for the .env
 require('dotenv').config();
 // Require needs modules.
@@ -5,6 +6,7 @@ const express = require('express');
 // Initialize the app object.
 const app = express();
 
+// Controllers and Routes
 // Adding 'use' for place.js
 app.use('/places', require('./controllers/places'));
 
