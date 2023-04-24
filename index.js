@@ -7,12 +7,18 @@ const express = require('express');
 const app = express();
 
 // Controllers and Routes
+
+// adding 'set' for home.
+app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
 // Adding 'use' for place.js
 app.use('/places', require('./controllers/places'));
 
 // Create homepage route.
+// Original: res.send('Hello world!');
+// Update: res.render('home);
 app.get('/', (req, res) => {
-    res.send('Hello world!');
+    res.render('home');
 });
 
 
@@ -24,7 +30,9 @@ app.get('*', (req, res) => {
 // Changing the HTML string for the response body and setting the status code to 404.
 // Original: res.send('<h1>404 Page</h1>');
 // Update: res.status(404).send('<h1>404 Page</h1>');
-    res.status(404).send('<h1>404 Page</h1>')
+// Previous update: res.status(404).send('<h1>404 Page</h1>')
+// New update: res.render('error404')
+    res.render('error404')
 });
 
 
