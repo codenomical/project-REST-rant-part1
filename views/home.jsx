@@ -1,4 +1,4 @@
-// Create home 
+// Create home page under views
 const React = require('react');
 const Def = require('./default')
 
@@ -12,4 +12,4 @@ function home () {
     )
 }
 
-module.exports = home
+module.exports = home;

@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 
 
 // Create a 404 route. 
-// Starting point: After written out you can see it by doing local:3000/*.
+// To test this route, visit any non-existent path on the server, e.g., http://localhost:3000/*.
 app.get('*', (req, res) => {
 
 

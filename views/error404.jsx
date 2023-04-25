@@ -1,3 +1,4 @@
+// Create 404 page under views
 const React = require('react');
 const Def = require('./default');
 
