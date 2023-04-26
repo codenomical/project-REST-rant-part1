@@ -6,13 +6,17 @@ const express = require('express');
 // Initialize the app object.
 const app = express();
 
-// Controllers and Routes
-
+// Express Settings 
 // adding 'set' for home.
-app.set('view engine', 'jsx')
-app.engine('jsx', require('express-react-views').createEngine())
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jsx');
+app.engine('jsx', require('express-react-views').createEngine());
+app.use(express.static('public'));
+
+// Controllors & Routes
 // Adding 'use' for place.js
 app.use('/places', require('./controllers/places'));
+
 
 // Create homepage route.
 // Original: res.send('Hello world!');
@@ -37,5 +41,6 @@ app.get('*', (req, res) => {
 
 
 // Listen for connections.
-// Update: app.listen(3000) - After adding .env, changed to:
+// Update: app.listen(****) - After adding .env, changed to:
 app.listen(process.env.PORT);
+console.log(`Listening to port: ${process.env.PORT}`);
