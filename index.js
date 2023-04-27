@@ -5,13 +5,14 @@ require('dotenv').config();
 const express = require('express');
 // Initialize the app object.
 const app = express();
+const path = require('path');
 
 // Express Settings 
 // adding 'set' for home.
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Controllors & Routes
 // Adding 'use' for place.js

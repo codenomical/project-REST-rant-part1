@@ -1,12 +1,21 @@
 // Create a home under /views/places
-const React = require('react');
-const Def = require('./default')
+const React = require("react");
+const Def = require("../default")
 
 function home () {
     return (
         <Def>
             <main>
-                <h1>HOME</h1>
+                <h1>REST-Rant</h1>
+                <div>
+                    <img src="/test/chia-fruit-drink-alt.png" alt="Chia Fruit Shake Alt" />
+                    <div>
+                        Photo by <a href="AUTHOR_LINK">Brenda Godinez</a> on <a href="UNSPLASH_LINK">Unsplash</a>
+                    </div>
+                </div>   
+                <a href="/places">
+                    <button className="btn btn-primary">Places Page</button>                
+                </a>
             </main>
         </Def>
     )

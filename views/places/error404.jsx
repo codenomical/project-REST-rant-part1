@@ -1,6 +1,6 @@
 // Create a error404 under /views/places
-const React = require('react');
-const Def = require('./default');
+const React = require("react");
+const Def = require("./default");
 
 function error404 () {
     return (
@@ -8,6 +8,9 @@ function error404 () {
             <main>
                 <h1> 404: PAGE NOT FOUND</h1>
                 <p>Oops, sorry, we can't find this page!</p>
+                <div>
+                <img src="/test/shrugging-404.jpg" alt="shrug" />
+                </div>
             </main>
         </Def>
     )
