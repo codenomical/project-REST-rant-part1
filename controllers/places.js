@@ -10,24 +10,26 @@ router.get('/new', (req, res) => {
 // Update: res.render('/places/index')
 // Update: let place with placeholding data.
 router.get('/', (req, res) => {
-    let places = [{
-        name: 'H-Thai-ML',
-        city: 'Seattle',
-        state: 'WA',
-        cuisines: 'Thai, Pan-Asian',
-        pic: 'http://placekitten.com/250/250'
-    }, {
-        name: 'Coding Cat Cafe',
-        city: 'Phoenix',
-        state: 'AZ',
-        cuisines: 'Coffee, Bakery',
-        pic: 'http://placekitten.com/250/250'
-    }]
-    res.render('places/index', { places});
+    // Update: commented out to remove the hard code so we can accept the new submissions on places form the post. At the same time the original restaurants will have the information parsed from ./models/places.js 
+    // let places = [{
+    //     name: 'H-Thai-ML',
+    //     city: 'Seattle',
+    //     state: 'WA',
+    //     cuisines: 'Thai, Pan-Asian',
+    //     pic: '/images/h-thai-ml-tables.jpeg'
+    // }, {
+    //     name: 'Coding Cat Cafe',
+    //     city: 'Phoenix',
+    //     state: 'AZ',
+    //     cuisines: 'Coffee, Bakery',
+    //     pic: '/images/coffee-cat.jpg'
+    // }]
+    res.render('places/index', { places });
 });
 
 router.post("/", (req, res) => {
-    console.log(req.body);
+    // Update: Tested with the console and now commenting out.
+    // console.log(req.body);
     if (!req.body.pic) {
         // Default image if one is not provided
         req.body.pic = 'http://placekitten.com/400/400'
