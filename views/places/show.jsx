@@ -2,15 +2,14 @@
 const React = require('react');
 const Def = require('./default');
 
-function showDetails () {
+function show (data) {
     return (
         <Def>
             <main>
-                <h1>Data for specific place</h1>
-                <p>Under Construction</p>
+                <h1>{ data.place.name }</h1>
             </main>
         </Def>
     )
 }
 
-module.exports = showDetails;
+module.exports = show;

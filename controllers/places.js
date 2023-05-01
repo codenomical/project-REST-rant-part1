@@ -5,25 +5,22 @@ router.get('/new', (req, res) => {
     res.render('places/new');
 });
 
+router.get('/:id', (req, res) => {
+    let id = Number(req.param.id);
+    if (isNaN(id)) {
+        res.render('error404');
+    } else if (!places[id]) {
+        res.render('error404');
+    } else {
+        res.render('places/show', { places: places[id] });
+    }   
+});
+
 // First Route created for this file.
 // Original: res.send('GET /places');
 // Update: res.render('/places/index')
 // Update: let place with placeholding data.
 router.get('/', (req, res) => {
-    // Update: commented out to remove the hard code so we can accept the new submissions on places form the post. At the same time the original restaurants will have the information parsed from ./models/places.js 
-    // let places = [{
-    //     name: 'H-Thai-ML',
-    //     city: 'Seattle',
-    //     state: 'WA',
-    //     cuisines: 'Thai, Pan-Asian',
-    //     pic: '/images/h-thai-ml-tables.jpeg'
-    // }, {
-    //     name: 'Coding Cat Cafe',
-    //     city: 'Phoenix',
-    //     state: 'AZ',
-    //     cuisines: 'Coffee, Bakery',
-    //     pic: '/images/coffee-cat.jpg'
-    // }]
     res.render('places/index', { places });
 });
 
@@ -44,6 +41,35 @@ router.post("/", (req, res) => {
     // Original: res.send("POST /places stub");
     // Update: res.redirect('/places')
     res.redirect('/places');
-})
+});
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Update: commented out to remove the hard code so we can accept the new submissions on places form the post. At the same time the original restaurants will have the information parsed from ./models/places.js 
+// let places = [{
+//     name: 'H-Thai-ML',
+//     city: 'Seattle',
+//     state: 'WA',
+//     cuisines: 'Thai, Pan-Asian',
+//     pic: '/images/h-thai-ml-tables.jpeg'
+// }, {
+//     name: 'Coding Cat Cafe',
+//     city: 'Phoenix',
+//     state: 'AZ',
+//     cuisines: 'Coffee, Bakery',
+//     pic: '/images/coffee-cat.jpg'
+// }]
