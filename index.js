@@ -3,6 +3,8 @@
 require('dotenv').config();
 // Require needs modules.
 const express = require('express');
+const methodOverride = require('method-override');
+
 // Initialize the app object.
 const app = express();
 const path = require('path');
@@ -14,6 +16,8 @@ app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+
 
 // Controllors & Routes
 // Adding 'use' for place.js
