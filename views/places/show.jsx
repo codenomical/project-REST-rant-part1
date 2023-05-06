@@ -8,7 +8,7 @@ function show (data) {
             <main>
                 <div className="container">
                     <h1>{ data.place.name }</h1>
-                    <div className="row">
+                    <div className="row justify-content-center">
                         <div className="col-md-6">
                             <img src={ data.place.pic } alt={ data.place.name } className="img-fluid" />
                         </div>
@@ -24,9 +24,9 @@ function show (data) {
                       </div>
                  </div>
              </div>
-                <a href="" className="btn btn-warning">Edit</a>
-                <form method="POST" action="">
-                    <button type="submit" className="btn btn-danger">
+                <a href={`/places/${data.id}/edit`} className="btn btn-warning">Edit</a>
+                <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+                    <button type="submit" value="Delete" className="btn btn-danger">
                     Delete
                     </button>
                 </form>    

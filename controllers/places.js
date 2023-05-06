@@ -5,6 +5,28 @@ router.get('/new', (req, res) => {
     res.render('places/new');
 });
 
+// First Route created for this file.
+// Original: res.send('GET /places');
+// Update: res.render('/places/index')
+// Update: let place with placeholding data.
+router.get('/', (req, res) => {
+    res.render('places/index', { places });
+});
+
+router.get('/:id/edit', (req, res) => {
+    let id = Number(req.params.id)
+    if (isNaN(id)) {
+        res.render('error404');
+    }
+    else if (!places[id]) {
+        res.render('error404');
+    }
+    else {
+        res.render('places/edit', {place: places[id]});
+    }
+});
+  
+
 router.get('/:id', (req, res) => {
     let id = Number(req.params.id);
     if (isNaN(id)) {
@@ -14,14 +36,6 @@ router.get('/:id', (req, res) => {
     } else {
         res.render('places/show', { place: places[id], id });
     }   
-});
-
-// First Route created for this file.
-// Original: res.send('GET /places');
-// Update: res.render('/places/index')
-// Update: let place with placeholding data.
-router.get('/', (req, res) => {
-    res.render('places/index', { places });
 });
 
 router.post("/", (req, res) => {
@@ -42,6 +56,25 @@ router.post("/", (req, res) => {
     // Update: res.redirect('/places')
     res.redirect('/places');
 });
+
+router.put('/:id', (req,res) => {
+    res.send('PUT route stub');
+});
+
+router.delete('/:id', (req, res) => {
+    let id = Number(req.params.id)
+    if (isNaN(id)) {
+      res.render('error404');
+    }
+    else if (!places[id]) {
+      res.render('error404');
+    }
+    else {
+      places.splice(id, 1)  
+      res.redirect('/places');
+    }
+  })
+  
 
 module.exports = router;
 
