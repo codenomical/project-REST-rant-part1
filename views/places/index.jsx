@@ -5,20 +5,20 @@ const Def = require("../default")
 
 // Update: Passing data as a parameter and placing in the block code let placesFormatted which will pass the data from places.js. function index does not have items hard-coded.
 function index (data) {
-    let placesFormatted = data.places.map((places) => {
+    let placesFormatted = data.places.map((place) => {
         return (
-            <div className="col-sm-6" key={places.name}>
+            <div className="col-sm-6" key={place.name}>
                 <h2>
                     <a href={`/places/${place._id}`} >
-                {places.name}
+                {place.name}
                     </a>
                 </h2>
                 <p className="text-center">
-                    {places.cuisines}
+                    {place.cuisines}
                 </p>
-                <img src={places.pic} alt={places.name}></img>
+                <img src={place.pic} alt={place.name}></img>
                 <p className="text-center">
-                    Located in {places.city}, {places.state}
+                    Located in {place.city}, {place.state}
                 </p>
             </div>
         )
