@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const db = require('./models');
+const db = require('../models');
 
 router.get('/', (req, res) => {
     db.Place.find()
@@ -13,13 +13,29 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    if (!req.body.pic) {
+        // Default image if one is not provided
+        req.body.pic = 'http://placekitten.com/400/400'
+    }
     db.Place.create(req.body)
     .then(() => {
         res.redirect('/places');
     })
     .catch(err => {
-        console.log('err', err);
-        res.render('error404');
+        if (err && err.name == 'ValidationError') {
+            let message = 'Validation Error: '
+            // TODO: Generate error message(s)
+            for (let field in err.errors) {
+                message += `${field} was ${err.errors[field].value}?`
+                message += `${err.errors[field].message}`
+            }
+            // TODO: Find all validation errors
+            console.log('Validation error message', message)
+            res.render('places/new', { message })
+        }
+        else {
+            res.render('error404');
+        }
     })
 });
 

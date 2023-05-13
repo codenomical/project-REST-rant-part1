@@ -3,7 +3,7 @@
 // console.log('__dirname:', __dirname);
 // const db = require('../models/index');
 
-const db = require('../controllers/models');
+const db = require('../models');
 
 db.Place.create([{
     name: 'H-Thai-ML',
