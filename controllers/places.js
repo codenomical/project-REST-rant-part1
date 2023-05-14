@@ -29,6 +29,16 @@ router.get('/:id', (req, res) => {
     })
 });
 
+router.get('/:id/edit', (req, res) => {
+    db.Place.findById(req.params.id)
+    .then(place => {
+        res.render('places/edit', { place })
+    })
+    .catch(err => {
+        res.render('error404')
+    })
+});
+
 router.post('/', (req, res) => {
     if (!req.body.pic) {
         // Default image if one is not provided
@@ -80,9 +90,28 @@ router.post('/:id/comment', (req,res) => {
         })
 });
 
+router.put('/:id', (req,res) => {
+    db.Place.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => {
+        res.redirect(`/places/${req.params.id}`)
+    })
+    .catch(err => {
+        console.log('err', err)
+        res.render('error404')
+    })
+});
 
-router.delete('/:id/rant/:rantId', (req, res) => {
-    res.send('GET /places/:id/rant/:rantId stub');
+router.delete('/:id', (req, res) => {
+    db.Place.findByIdAndDelete(req.params.id)
+    .then(place => {
+        res.redirect('/places')
+
+    })
+    .catch(err => {
+        console.log('err', err)
+        res.render('error404')
+    })
+    
 });
   
 
