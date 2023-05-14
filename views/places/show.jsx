@@ -11,7 +11,21 @@ function show (data) {
             No comments yet!
         </h3>
     )
+    let rating = (
+        <h3 className="inactive">
+            Not yet rated
+        </h3>
+    )
     if (data.place.comments.length) {
+        let sumRatings = data.place.comments.reduce((tot, c) => {
+            return tot + c.stars
+        }, 0)
+        let averageRating = sumRatings / data.place.comments.length 
+        rating = (
+            <h3>
+                {averageRating} stars
+            </h3>
+        )
         comments = data.place.comments.map(c => {
             return (
                 <div className="border" key={c._id}>
@@ -48,14 +62,15 @@ function show (data) {
                         { data.place.cuisines }
                     </h4>
                         <h2>Rating</h2>
-                        <p>Currently unrated</p>
+                        { rating }
 
                         <h2>Comments</h2>
                         { comments }
                       </div>
                     </div>
                 </div>
-                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">Edit</a>        
+                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">Edit</a>
+
                 <form action={`/places/${data.place.id}/comment`} method="POST">
                     <label htmlFor="author">Author:</label>
                     <input type="text" id="author" name="author"></input>
@@ -71,6 +86,7 @@ function show (data) {
 
                     <input type="submit" value="Submit"></input>
                 </form>
+
                 <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
                     <button type="submit" value="Delete" className="btn btn-danger">
                     Delete
