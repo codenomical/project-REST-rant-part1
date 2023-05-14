@@ -4,6 +4,7 @@ require('dotenv').config();
 // Require needs modules.
 const express = require('express');
 const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 
 // Initialize the app object.
 const app = express();
@@ -17,6 +18,8 @@ app.engine('jsx', require('express-react-views').createEngine());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 // Controllors & Routes

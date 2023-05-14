@@ -4,6 +4,8 @@ const Def = require("../default");
 
 console.log('Rendering show.jsx')
 function show (data) {
+    console.log(data.place.id)
+
     let comments = (
         <h3 className='inactive'>
             No comments yet!
@@ -12,7 +14,7 @@ function show (data) {
     if (data.place.comments.length) {
         comments = data.place.comments.map(c => {
             return (
-                <div className="border">
+                <div className="border" key={c._id}>
                 <h2 className="rant">{c.rant ? 'Rant! ðŸ˜¡' : 'Rave! ðŸ˜»'}</h2>
                 <h4>{c.content}</h4>
                 <h3>
@@ -49,11 +51,26 @@ function show (data) {
                         <p>Currently unrated</p>
 
                         <h2>Comments</h2>
-                        <p>{ comments }</p>
+                        { comments }
                       </div>
-                 </div>
-             </div>
-                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">Edit</a>
+                    </div>
+                </div>
+                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">Edit</a>        
+                <form action={`/places/${data.place.id}/comment`} method="POST">
+                    <label htmlFor="author">Author:</label>
+                    <input type="text" id="author" name="author"></input>
+
+                    <label htmlFor="content">content</label>
+                    <textarea id="content" name="content"></textarea>
+
+                    <label htmlFor="stars">Star Rating</label>
+                    <input type="number" id="stars" name="stars" step="0.5"></input>
+
+                    <label htmlFor="rant">Rant</label>
+                    <input type="checkbox" id="rant" name="rant"></input>
+
+                    <input type="submit" value="Submit"></input>
+                </form>
                 <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
                     <button type="submit" value="Delete" className="btn btn-danger">
                     Delete

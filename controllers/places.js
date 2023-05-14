@@ -56,9 +56,30 @@ router.post('/', (req, res) => {
     })
 });
 
-router.post('/:id/rant', (req, res) => {
-    res.send('Get /places/:id/rant stub');
+router.post('/:id/comment', (req,res) => {
+    console.log(req.body);
+    req.body.rant = req.body.rant === 'on' ? true : false;
+        db.Place.findById(req.params.id)
+        .then(place => {
+            db.Comments.create(req.body)
+            .then(comment => {
+                // TODO: Save comment id to place
+                place.comments.push(comment.id)
+                place.save()
+                .then(() => {
+                    res.redirect(`/places/${req.params.id}`)
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                res.render('error404')
+            })
+        })
+        .catch(err => {
+            res.render('error404')
+        })
 });
+
 
 router.delete('/:id/rant/:rantId', (req, res) => {
     res.send('GET /places/:id/rant/:rantId stub');
@@ -217,13 +238,25 @@ module.exports = router;
 //   })
 
 
+// router.post('/:id/comments', (req, res) => {
+//     const placeId = req.params.id;
 
+//     const newCommentData = req.body;
 
-
-
-
-
-
+//     db.Comments.create(newCommentData)
+//     .then((newCommentData) => {
+//         return db.Place.findByIdAndUpdate(
+//             placeId,
+//             { $push: { comments: newCommentData.id } },
+//         );
+//     })
+//     .then(() => {
+//         res.redirect(`/places/${placeId}`);
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
+// });
 
 
 // Update: commented out to remove the hard code so we can accept the new submissions on places form the post. At the same time the original restaurants will have the information parsed from ./models/places.js 
